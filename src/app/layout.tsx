@@ -1,21 +1,31 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import "../globals.css"
+import { ThemeProvider } from "@/components/themeProvider";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "../globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Awardlys',
-}
+  title: "Awardlys",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt">
-      <body className={`${inter.className} bg-slate-900`}>{children}</body>
+    <html lang="pt-br">
+      <body className={`${inter.className}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
-  )
+  );
 }
