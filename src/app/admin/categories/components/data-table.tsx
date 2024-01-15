@@ -1,5 +1,4 @@
 "use client";
-
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -9,6 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -18,7 +18,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Plus } from "lucide-react";
 import { useState } from "react";
+import { UpdateTable } from "./updateTable";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,15 +45,21 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border">
-      <div className="flex items-center p-4">
-        <Input
-          placeholder="Pesquise uma categoria..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+      <div className=" flex justify-between p-4 items-center">
+        <div className="flex items-center w-1/2 gap-8">
+          <Input
+            placeholder="Pesquise uma categoria..."
+            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("name")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <UpdateTable />
+        </div>
+        <Button className=" flex gap-1">
+          <Plus /> <span>Adicionar</span>
+        </Button>
       </div>
       <Table>
         <TableHeader>
