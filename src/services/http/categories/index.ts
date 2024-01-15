@@ -2,16 +2,17 @@ import { Category } from "@/types";
 import { api } from "../api";
 
 const acessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBlbWFpbC5jb20iLCJpYXQiOjE3MDUxNDUwNTgsImV4cCI6MTcwNTc0OTg1OH0.qhN8AykEZ0PTQZY_7yrsaALfn_lnpvPISfUGS17kh-4";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvbmFzQGVtYWlsLmNvbSIsImlhdCI6MTcwNTI0NDExMiwiZXhwIjoxNzA1ODQ4OTEyfQ.9xAnYFbZnLhwQamrDhCedargz2mPiCHBnnkoVASUqbQ";
 
 export const getCategories = async (): Promise<Category[]> => {
   try {
     const output = await api.get("/categories", {
       headers: { Authorization: "Bearer " + acessToken },
     });
+
     return output.data?.categories;
   } catch (error) {
-    console.log(error);
+    console.log("Deu ruim:", error);
     // message.error("Não foi possível buscar as categorias");
     return [];
   }
