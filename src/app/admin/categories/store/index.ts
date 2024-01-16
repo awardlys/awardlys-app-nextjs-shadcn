@@ -7,8 +7,10 @@ interface StoreCategory {
   setTryAgain: (value: boolean) => void;
   loading: boolean;
   setLoading: (value: boolean) => void;
-  categories: Category[];
-  setCategories: (category: Category[]) => void;
+  categoriesEdit: Category | null;
+  setCategoriesEdit: (category: Category | null) => void;
+  modalOpen: boolean;
+  setModalOpen: (value: boolean) => void;
 }
 
 export const useStoreCategory = create<StoreCategory>((set) => ({
@@ -16,6 +18,8 @@ export const useStoreCategory = create<StoreCategory>((set) => ({
   setTryAgain: (value) => set({ tryAgain: value }),
   loading: false,
   setLoading: (value) => set({ loading: value }),
-  categories: [],
-  setCategories: (value) => set({ categories: value }),
+  categoriesEdit: null,
+  setCategoriesEdit: (value) => set({ categoriesEdit: value }),
+  modalOpen: false,
+  setModalOpen: (value) => set({ modalOpen: value }),
 }));

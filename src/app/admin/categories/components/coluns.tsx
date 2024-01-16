@@ -1,7 +1,7 @@
 "use client";
 import { Category } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { PenLineIcon, Trash2 } from "lucide-react";
+import { EditColumn } from "./edit-column";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -22,11 +22,6 @@ export const columns: ColumnDef<Category>[] = [
   },
   {
     header: "Editar",
-    cell: ({ row }) => (
-      <div className="flex gap-4 justify-start">
-        <Trash2 className="cursor-pointer" />{" "}
-        <PenLineIcon className="cursor-pointer" />
-      </div>
-    ),
+    cell: ({ row }) => <EditColumn categories={row.original} />,
   },
 ];
