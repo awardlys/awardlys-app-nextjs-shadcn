@@ -1,7 +1,7 @@
 "use client";
 import { Category } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { EditColumn } from "./edit-column";
+import { EditColumn } from "./editColumn";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -22,6 +22,6 @@ export const columns: ColumnDef<Category>[] = [
   },
   {
     header: "Editar",
-    cell: ({ row }) => <EditColumn categories={row.original} />,
+    cell: ({ row }) => <EditColumn category={row.original} />,
   },
 ];

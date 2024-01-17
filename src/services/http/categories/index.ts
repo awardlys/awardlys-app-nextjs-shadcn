@@ -34,6 +34,7 @@ export const postCategory = async (
 
     return true;
   } catch (error) {
+    console.error(error);
     toast.error(`Não foi possível criar a categoria ${data.name}`);
     return false;
   }

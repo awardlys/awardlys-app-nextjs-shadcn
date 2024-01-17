@@ -1,8 +1,9 @@
-"use client";
 import { Category } from "@/types";
 import { create } from "zustand";
 
 interface StoreCategory {
+  categories: Category[];
+  setCategories: (value: Category[]) => void;
   tryAgain: boolean;
   setTryAgain: (value: boolean) => void;
   loading: boolean;
@@ -14,7 +15,9 @@ interface StoreCategory {
 }
 
 export const useStoreCategory = create<StoreCategory>((set) => ({
-  tryAgain: true,
+  categories: [] as Category[],
+  setCategories: (value) => set({ categories: value }),
+  tryAgain: false,
   setTryAgain: (value) => set({ tryAgain: value }),
   loading: false,
   setLoading: (value) => set({ loading: value }),

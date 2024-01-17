@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 import { useStoreCategory } from "../store";
 
-export function UpdateTable() {
-  const { setTryAgain } = useStoreCategory();
+export function ButtonUpdateTable() {
+  const { setTryAgain, loading } = useStoreCategory();
   const [disabled, setDisabled] = useState(false);
 
   function updateTable() {
@@ -12,6 +13,9 @@ export function UpdateTable() {
     setTimeout(() => {
       setDisabled(false);
     }, 5000);
+    if (!loading) {
+      toast.success("Atualizada com sucesso!");
+    }
   }
   return (
     <Button disabled={disabled} onClick={updateTable}>

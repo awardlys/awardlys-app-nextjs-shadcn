@@ -13,10 +13,18 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useStoreCategory } from "../store";
 
-const formSchema = z.object({
-  name: z.string().min(2, "Digite no mímino 2 caracteres!").max(50),
-  description: z.string().max(50, "Digite no mímino 50 caracteres!"),
-});
+const formSchema = z
+  .object({
+    name: z
+      .string()
+      .min(2, "Digite no mímino 2 caracteres!")
+      .max(50, "Digite no máximo 50 caracteres!"),
+    description: z
+      .string()
+      .min(2, "Digite no mímino 2 caracteres!")
+      .max(50, "Digite no máximo 50 caracteres!"),
+  })
+  .required();
 
 export type ValuesSubmit = z.infer<typeof formSchema>;
 
