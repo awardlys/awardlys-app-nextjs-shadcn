@@ -39,7 +39,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-6"
       >
         <FormField
           control={form.control}
@@ -47,7 +47,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Escreva o titulo da categoria" {...field} />
+                <Input placeholder="Digite o nome da categoria..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -61,7 +61,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
               <FormControl>
                 <Textarea
                   maxLength={50}
-                  placeholder="Digite uma descrição"
+                  placeholder="Digite uma descrição..."
                   {...field}
                 />
               </FormControl>
@@ -69,7 +69,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
             </FormItem>
           )}
         />
-        <Button disabled={loading} className="w-1/3" type="submit">
+        <Button disabled={loading} className="w-1/3 ml-auto" type="submit">
           Enviar
         </Button>
       </form>

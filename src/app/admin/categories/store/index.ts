@@ -14,7 +14,7 @@ interface StoreCategory {
 }
 
 export const useStoreCategory = create<StoreCategory>((set) => ({
-  tryAgain: false,
+  tryAgain: true,
   setTryAgain: (value) => set({ tryAgain: value }),
   loading: false,
   setLoading: (value) => set({ loading: value }),

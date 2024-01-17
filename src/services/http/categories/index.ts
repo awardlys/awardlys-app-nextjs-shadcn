@@ -2,8 +2,7 @@ import { Category } from "@/types";
 import { toast } from "sonner";
 import { api } from "../api";
 
-const acessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldkBlbWFpbC5jb20iLCJpYXQiOjE3MDUxNDUwNTgsImV4cCI6MTcwNTc0OTg1OH0.qhN8AykEZ0PTQZY_7yrsaALfn_lnpvPISfUGS17kh-4";
+const acessToken = process.env.NEXT_PUBLIC_ACESSTOKEN;
 
 const headers = {
   headers: { Authorization: `Bearer ${acessToken}` },
@@ -14,7 +13,7 @@ export const getCategories = async (): Promise<Category[]> => {
 
     return output.data?.categories;
   } catch (error) {
-    console.error("Deu ruim:", error);
+    console.error(error);
     toast.error("Não foi possível buscar as categorias");
     return [];
   }
@@ -35,7 +34,7 @@ export const postCategory = async (
 
     return true;
   } catch (error) {
-    toast.error(`Não foi possível criar a ${data.name}`);
+    toast.error(`Não foi possível criar a categoria ${data.name}`);
     return false;
   }
 };
@@ -55,7 +54,8 @@ export const updateCategory = async (
       return false;
     }
 
-    toast.success(`${name} editada com sucesso`);
+    toast.success(`${name} editada para ${data.name} 
+    com sucesso`);
 
     return true;
   } catch (error) {

@@ -77,9 +77,9 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <div className="rounded-md border">
-      <div className=" flex justify-between p-4 items-center">
-        <div className="flex items-center w-1/2 gap-8">
+    <div className="flex flex-col gap-6 ">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center w-full gap-8">
           <Input
             placeholder="Pesquise uma categoria..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -98,7 +98,7 @@ export function DataTable<TData, TValue>({
       </div>
       {loading && <SkeletonCategories />}
       {loading === false && (
-        <Table>
+        <Table className="border- rounded-t-xl">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -151,7 +151,7 @@ export function DataTable<TData, TValue>({
         </Table>
       )}
       <Dialog onOpenChange={setModalOpen} open={modalOpen}>
-        <DialogContent>
+        <DialogContent className="flex flex-col gap-8">
           <DialogHeader>
             <DialogTitle>Criar categoria</DialogTitle>
           </DialogHeader>

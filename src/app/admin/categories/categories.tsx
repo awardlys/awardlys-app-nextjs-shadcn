@@ -7,8 +7,8 @@ import { columns } from "./components/coluns";
 import { DataTable } from "./components/data-table";
 import { useStoreCategory } from "./store";
 
-export function CategoriesPage() {
-  const [categories, setCategories] = useState<Category[]>([]);
+export function CategoriesPage({ data }: { data: Category[] }) {
+  const [categories, setCategories] = useState(data);
   const { setLoading, setTryAgain, tryAgain } = useStoreCategory();
 
   useEffect(() => {
@@ -32,12 +32,5 @@ export function CategoriesPage() {
       });
   }, [setLoading, setTryAgain, tryAgain]);
 
-  return (
-    <div className="py-8">
-      {categories.length === 0 && <div>...carregando</div>}
-      {categories.length > 0 && (
-        <DataTable columns={columns} data={categories} />
-      )}
-    </div>
-  );
+  return <DataTable columns={columns} data={categories} />;
 }

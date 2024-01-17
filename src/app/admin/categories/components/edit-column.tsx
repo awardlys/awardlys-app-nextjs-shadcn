@@ -3,7 +3,7 @@ import { Category } from "@/types";
 import { PenLineIcon, Trash2 } from "lucide-react";
 import { useStoreCategory } from "../store";
 
-export function EditColumn({ categories }: { categories: Category }) {
+export function EditColumn({ categories }: Readonly<{ categories: Category }>) {
   const { setTryAgain, setModalOpen, setCategoriesEdit } = useStoreCategory();
 
   function editCategory() {
