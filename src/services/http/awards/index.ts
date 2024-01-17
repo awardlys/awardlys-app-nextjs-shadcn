@@ -1,6 +1,6 @@
 import { message } from "antd";
-import { api } from "../api";
 import { Award } from "../../../types";
+import { api } from "../api";
 
 export const getAward = async (id: string): Promise<Award | undefined> => {
   try {

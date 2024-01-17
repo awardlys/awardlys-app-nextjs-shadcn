@@ -29,6 +29,7 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useStoreCategory } from "../store";
 import { CategoriesForm, ValuesSubmit } from "./form";
+import { SkeletonCategories } from "./skeleton-categories";
 import { UpdateTable } from "./update-table";
 
 interface DataTableProps<TData, TValue> {
@@ -47,6 +48,7 @@ export function DataTable<TData, TValue>({
     setTryAgain,
     categoriesEdit,
     setCategoriesEdit,
+    loading,
   } = useStoreCategory();
   const table = useReactTable({
     data,
@@ -60,8 +62,10 @@ export function DataTable<TData, TValue>({
   });
   async function onSubmit(values: ValuesSubmit) {
     if (categoriesEdit?.id) {
-      updateCategory(categoriesEdit.id, values);
-      setTryAgain(false);
+      updateCategory(categoriesEdit.id, values, categoriesEdit.name)
+        .then()
+        .catch()
+        .finally(() => setTryAgain(false));
       setModalOpen(false);
       setCategoriesEdit(null);
     } else {
@@ -92,48 +96,60 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
       </div>
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+      {loading && <SkeletonCategories />}
+      {loading === false && (
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead
+                      key={header.id}
+                      className="w-1/4 last:w-[50px] last:text-center"
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  );
+                })}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  Nenhuma Categoria...
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      )}
       <Dialog onOpenChange={setModalOpen} open={modalOpen}>
         <DialogContent>
           <DialogHeader>

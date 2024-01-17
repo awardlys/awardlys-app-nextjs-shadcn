@@ -14,7 +14,7 @@ export const getCategories = async (): Promise<Category[]> => {
 
     return output.data?.categories;
   } catch (error) {
-    console.log("Deu ruim:", error);
+    console.error("Deu ruim:", error);
     toast.error("Não foi possível buscar as categorias");
     return [];
   }
@@ -42,21 +42,24 @@ export const postCategory = async (
 
 export const updateCategory = async (
   id: string,
-  data: Omit<Category, "id" | "createdAt" | "updatedAt">
+  data: Omit<Category, "id" | "createdAt" | "updatedAt">,
+  name: string
 ) => {
   try {
     const output = await api.patch(`/categories/${id}`, data, headers);
 
     if (!String(output.status).startsWith("2")) {
-      toast.warning("Verifique se os dados estão corretos e tente novamente");
+      toast.warning(
+        `Verifique se os dados da categoria ${name} estão corretos e tente novamente`
+      );
       return false;
     }
 
-    toast.success(`${data.name} editada com sucesso`);
+    toast.success(`${name} editada com sucesso`);
 
     return true;
   } catch (error) {
-    toast.error(`Não foi possível criar a ${data.name}`);
+    toast.error(`Não foi possível criar a ${name}`);
     return false;
   }
 };

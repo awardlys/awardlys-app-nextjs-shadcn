@@ -1,5 +1,4 @@
 "use client";
-
 import { getCategories } from "@/services/http/categories";
 import { Category } from "@/types";
 import daysjs from "dayjs";
@@ -35,7 +34,10 @@ export function CategoriesPage() {
 
   return (
     <div className="py-8">
-      <DataTable columns={columns} data={categories} />
+      {categories.length === 0 && <div>...carregando</div>}
+      {categories.length > 0 && (
+        <DataTable columns={columns} data={categories} />
+      )}
     </div>
   );
 }
