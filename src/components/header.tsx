@@ -1,47 +1,28 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { NavLink } from "@/app/admin/categories/components/navLink";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { AwardIcon } from "lucide-react";
 import { ModeToggle } from "./toggleTheme";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function Header() {
-  const data = usePathname();
-  const current = data.split("/")[2];
-
   return (
     <header className="flex justify-between mx-6 py-4 items-center select-none">
-      <span className="font-bold">awardlys</span>
+      <div className="flex items-center gap-1">
+        <span className="font-bold">awardlys</span>
+        <Separator className="h-4 w-px bg-muted-foreground" />
+        <AwardIcon size={18} />
+      </div>
       <nav className="flex gap-6">
         <ul className="flex h-full gap-6 items-center">
           <li>
-            <Link
-              className={`px-4 py-2 rounded-2xl ${
-                current === "awards" && "bg-foreground text-muted"
-              }`}
-              href={"/admin/awards"}
-            >
-              awards
-            </Link>
+            <NavLink href={"/admin/awards"}>awards</NavLink>
           </li>
           <li>
-            <Link
-              href={"/admin/categories"}
-              className={`px-4 py-2 rounded-2xl ${
-                current === "categories" && "bg-foreground text-muted"
-              }`}
-            >
-              categories
-            </Link>
+            <NavLink href={"/admin/categories"}>categories</NavLink>
           </li>
           <li>
-            <Link
-              href={"/admin/games"}
-              className={`px-4 py-2 rounded-2xl ${
-                current === "games" && "bg-foreground text-muted"
-              }`}
-            >
-              games
-            </Link>
+            <NavLink href={"/admin/games"}>games</NavLink>
           </li>
         </ul>
       </nav>

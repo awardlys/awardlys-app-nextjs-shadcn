@@ -3,7 +3,7 @@ import { Category } from "@/types";
 import { Table, flexRender } from "@tanstack/react-table";
 import { columns } from "./coluns";
 
-export function TableCategory({ table }: { table: Table<Category> }) {
+export function TableCategory({ table }: Readonly<{ table: Table<Category> }>) {
   return (
     <T.Table className="border- rounded-t-xl">
       <T.TableHeader>

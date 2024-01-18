@@ -1,7 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableCell, TableRow } from "@/components/ui/table";
+import { useStoreCategory } from "../store";
 
 export function useSkeleton() {
+  const { categories } = useStoreCategory();
+  const amount = categories.length > 0 ? categories.length : 1;
   const skeleton = [];
   const cell = [];
 
@@ -14,7 +17,7 @@ export function useSkeleton() {
       ),
     });
   }
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < amount; i++) {
     skeleton.push({
       data: <TableRow>{cell.map((i) => i.data)}</TableRow>,
     });

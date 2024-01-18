@@ -64,8 +64,10 @@ export function useDataTable() {
       updateCategory(categoriesEdit.id, values, categoriesEdit.name)
         .then()
         .catch()
-        .finally(() => setTryAgain(false));
-      setModalOpen(false);
+        .finally(() => {
+          setTryAgain(false);
+          setModalOpen(false);
+        });
       setCategoriesEdit(null);
     } else {
       const res = await postCategory(values);
