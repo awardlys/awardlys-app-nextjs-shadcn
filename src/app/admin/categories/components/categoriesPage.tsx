@@ -36,7 +36,12 @@ export function CategoriesPage() {
         {loading === false && <TableCategory table={table} />}
       </div>
 
-      <D.Dialog onOpenChange={setModalOpen} open={modalOpen}>
+      <D.Dialog
+        onOpenChange={(value) => {
+          setModalOpen(value);
+        }}
+        open={modalOpen}
+      >
         <D.DialogContent className="flex flex-col gap-8">
           <D.DialogHeader>
             <D.DialogTitle>Criar categoria</D.DialogTitle>
