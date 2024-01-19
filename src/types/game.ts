@@ -7,3 +7,5 @@ export type Game = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type CreateOrUpdateGame = Omit<Game, "id" | "createdAt" | "updatedAt">;
