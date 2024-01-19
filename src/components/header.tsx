@@ -1,6 +1,5 @@
 "use client";
 import { NavLink } from "@/app/admin/categories/components/navLink";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import { AwardIcon } from "lucide-react";
 import { ModeToggle } from "./toggleTheme";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -8,10 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 export function Header() {
   return (
     <header className="flex justify-between mx-6 py-4 items-center select-none">
-      <div className="flex items-center gap-1">
+      <div className="flex items-center  gap-1">
+        <AwardIcon className="h-4 w-4" />
         <span className="font-bold">awardlys</span>
-        <Separator className="h-4 w-px bg-muted-foreground" />
-        <AwardIcon size={18} />
       </div>
       <nav className="flex gap-6">
         <ul className="flex h-full gap-6 items-center">
