@@ -1,8 +1,4 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,46 +9,37 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-const passwordMinLength = 8;
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(2, {
-      message: "E-mail inválido!",
-    })
-    .email("Digite um e-mail válido!"),
+import { login } from "@/services/http/signIn";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodSchema } from "./schema";
 
-  password: z
-    .string()
-    .min(passwordMinLength, {
-      message: `A senha deve ter pelo menos ${passwordMinLength} caracteres.`,
-    })
-    .refine((value) => /[a-z]/.test(value), {
-      message: "A senha deve conter pelo menos uma letra minúscula.",
-    })
-    .refine((value) => /[A-Z]/.test(value), {
-      message: "A senha deve conter pelo menos uma letra maiúscula.",
-    })
-    .refine((value) => /\d/.test(value), {
-      message: "A senha deve conter pelo menos um número.",
-    })
-    .refine((value) => /[@$!%*?&]/.test(value), {
-      message: "A senha deve conter pelo menos um caractere especial.",
-    }),
-});
+const { schema } = zodSchema();
+type typeSchema = z.infer<typeof schema>;
 
 export function LoginForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { replace } = useRouter();
+  const authorized = JSON.parse(localStorage.getItem("token") ?? "null");
+  if (authorized) {
+    replace("/admin/awards");
+  }
+
+  const form = useForm<typeSchema>({
+    resolver: zodResolver(schema),
     defaultValues: {
       email: "",
-      password: "",
+      passwordHash: "",
     },
   });
-  console.log(form.formState.errors.password?.message);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: typeSchema) {
+    const data = await login(values);
+    if (data?.status === 201) {
+      localStorage.setItem("token", JSON.stringify(data?.data.access_token));
+      replace("/admin/awards");
+    }
   }
 
   return (
@@ -65,7 +52,11 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu e-mail..." {...field} />
+                <Input
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -73,12 +64,16 @@ export function LoginForm() {
         />
         <FormField
           control={form.control}
-          name="password"
+          name="passwordHash"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu password..." {...field} />
+                <Input
+                  type="password"
+                  placeholder="Digite seu password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

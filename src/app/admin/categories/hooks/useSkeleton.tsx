@@ -4,7 +4,7 @@ import { useStoreCategory } from "../store";
 
 export function useSkeleton() {
   const { categories } = useStoreCategory();
-  const amount = categories.length > 0 ? categories.length : 1;
+  const amount = categories.length > 0 ? categories.length : 5;
   const skeleton = [];
   const cell = [];
 

@@ -17,7 +17,7 @@ export function CategoriesPage() {
       <div className="flex justify-between items-center">
         <div className="flex items-center w-full gap-8">
           <Input
-            placeholder="Pesquise uma categoria..."
+            placeholder="Pesquise uma categoria"
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)

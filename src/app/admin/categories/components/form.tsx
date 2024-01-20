@@ -55,7 +55,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Digite o nome da categoria..." {...field} />
+                <Input placeholder="Digite o nome da categoria" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,7 +69,7 @@ export function CategoriesForm({ onSubmit }: CategoriesFormProps) {
               <FormControl>
                 <Textarea
                   maxLength={50}
-                  placeholder="Digite uma descrição..."
+                  placeholder="Digite uma descrição"
                   {...field}
                 />
               </FormControl>

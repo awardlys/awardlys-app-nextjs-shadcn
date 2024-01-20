@@ -2,6 +2,8 @@ import { Category } from "@/types";
 import { create } from "zustand";
 
 interface StoreCategory {
+  infoUpdate: string;
+  setInfoUpdate: (value: string) => void;
   categories: Category[];
   setCategories: (value: Category[]) => void;
   tryAgain: boolean;
@@ -15,6 +17,8 @@ interface StoreCategory {
 }
 
 export const useStoreCategory = create<StoreCategory>((set) => ({
+  infoUpdate: "",
+  setInfoUpdate: (value) => set({ infoUpdate: value }),
   categories: [] as Category[],
   setCategories: (value) => set({ categories: value }),
   tryAgain: false,

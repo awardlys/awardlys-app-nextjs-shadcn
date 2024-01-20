@@ -1,4 +1,4 @@
-import { CategoriesPage } from "./components/categoriesPage";
+import { CategoriesPage } from "./components/categories";
 
 export default function Categories() {
   return <CategoriesPage />;

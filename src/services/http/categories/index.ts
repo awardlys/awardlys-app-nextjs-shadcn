@@ -2,14 +2,9 @@ import { Category } from "@/types";
 import { toast } from "sonner";
 import { api } from "../api";
 
-const acessToken = process.env.NEXT_PUBLIC_ACESSTOKEN;
-
-const headers = {
-  headers: { Authorization: `Bearer ${acessToken}` },
-};
 export const getCategories = async (): Promise<Category[]> => {
   try {
-    const output = await api.get("/categories", headers);
+    const output = await api.get("/categories");
 
     return output.data?.categories;
   } catch (error) {
@@ -23,7 +18,7 @@ export const postCategory = async (
   data: Omit<Category, "id" | "createdAt" | "updatedAt">
 ) => {
   try {
-    const output = await api.post("/categories", data, headers);
+    const output = await api.post("/categories", data);
 
     if (!String(output.status).startsWith("2")) {
       toast.warning("Verifique se os dados estão corretos e tente novamente");
@@ -46,7 +41,7 @@ export const updateCategory = async (
   name: string
 ) => {
   try {
-    const output = await api.patch(`/categories/${id}`, data, headers);
+    const output = await api.patch(`/categories/${id}`, data);
 
     if (!String(output.status).startsWith("2")) {
       toast.warning(
@@ -67,7 +62,7 @@ export const updateCategory = async (
 
 export const deleteCategory = async (id: string): Promise<void> => {
   try {
-    await api.delete(`/categories/${id}`, headers);
+    await api.delete(`/categories/${id}`);
     toast.info("Categoria excluída com sucesso");
   } catch (error) {
     toast.error("Não foi possível excluir a categoria");
