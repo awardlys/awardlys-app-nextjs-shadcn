@@ -46,10 +46,6 @@ const formSchema = z.object({
 
 export function RegisterForm() {
   const { replace } = useRouter();
-  const authorized = JSON.parse(localStorage.getItem("token") ?? "null");
-  if (authorized) {
-    replace("/admin/awards");
-  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,7 +73,11 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu username" {...field} />
+                <Input
+                  type="text"
+                  placeholder="Digite seu username"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +90,11 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu e-mail" {...field} />
+                <Input
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,7 +107,11 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Digite seu password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

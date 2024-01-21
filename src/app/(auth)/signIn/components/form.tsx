@@ -21,10 +21,6 @@ type typeSchema = z.infer<typeof schema>;
 
 export function LoginForm() {
   const { replace } = useRouter();
-  const authorized = JSON.parse(localStorage.getItem("token") ?? "null");
-  if (authorized) {
-    replace("/admin/awards");
-  }
 
   const form = useForm<typeSchema>({
     resolver: zodResolver(schema),
