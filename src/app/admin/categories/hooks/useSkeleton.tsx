@@ -13,7 +13,7 @@ export function useSkeleton() {
       </TableCell>
     );
   });
-  const skeleton = Array.from({ length: amount }).map((d => {
+  const skeleton = Array.from({ length: amount }).map(() => {
     return (
       <TableRow key={window.crypto.randomUUID()}>
         {cell.map((item) => item)}
