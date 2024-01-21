@@ -40,7 +40,7 @@ export function SkeletonCategories() {
           </T.TableRow>
         ))}
       </T.TableHeader>
-      <T.TableBody>{skeleton.map((i) => i.data)}</T.TableBody>
+      <T.TableBody>{skeleton.map((item) => item)}</T.TableBody>
     </T.Table>
   );
 }
