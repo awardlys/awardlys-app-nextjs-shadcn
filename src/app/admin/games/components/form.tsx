@@ -24,7 +24,6 @@ const formSchema = z
       .min(2, "Digite no mímino 2 caracteres!")
       .max(50, "Digite no máximo 50 caracteres!"),
     platform: z.string(),
-    image_url: z.string(),
   })
   .required();
 
@@ -55,7 +54,7 @@ export function CategoriesForm({ onSubmit }: Readonly<CategoriesFormProps>) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Digite o nome da categoria..." {...field} />
+                <Input placeholder="Digite o nome do jogo" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,9 +68,21 @@ export function CategoriesForm({ onSubmit }: Readonly<CategoriesFormProps>) {
               <FormControl>
                 <Textarea
                   maxLength={50}
-                  placeholder="Digite uma descrição..."
+                  placeholder="Digite uma descrição"
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="platform"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Informe a plataforma" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
